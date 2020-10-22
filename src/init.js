@@ -1,4 +1,5 @@
 import { initState } from './state';
+import { compilerToFunction } from './compiler/index';
 
 export function initMixin (Vue) {
     // 初始化流程
@@ -25,7 +26,7 @@ export function initMixin (Vue) {
             if (!template && el) {
                 template = el.outerHTML;
             }
-            console.log(template)
+            compilerToFunction(template);
         }
     }
 }
