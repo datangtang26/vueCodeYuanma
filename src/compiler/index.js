@@ -10,6 +10,36 @@ const attribute = /^\s*([^\s"'<>\/=]+)(?:\s*(=)\s*(?:"([^"]*)"+|'([^']*)'+|([^\s
 const startTagClose = /^\s*(\/?)>/; // 匹配标签结束的 >
 const defaultTagRE = /\{\{((?:.|\r?\n)+?)\}\}/g; // 匹配{{}}
 
+function parseHTML (html) {
+    // 循环解析html字符串
+    while (html) {
+        let textEnd = html.indexOf('<');
+        if (textEnd == 0) {
+            // 如果当前索引=0，则是一个标签 开始标签或者结束标签
+            let startTagMatch = parseStartTag();
+            break;
+        }
+    }
+    function advance (n) {
+        html = html.substring(n);
+    }
+    function parseStartTag () {
+        let start = html.match(startTagOpen);
+        if (start) {
+            const match = {
+                tagName: start[1],
+                attrs: []
+            }
+            advance(start[0].length);
+            console.log(start);
+            console.log(html);
+        }
+    }
+}
+
 export function compilerToFunction (template) {
-    console.log(template, '=====');
+    let root = parseHTML(template);
+    return function render () {
+
+    }
 }
